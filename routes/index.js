@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const User = require('../models/users');
 const HealthCare = require('../models/healthcares');
-const HealthCarePlans = require('../models/healthcaresplans');
+const HealthCarePlans = require('../models/healthcareplans');
 // const HCP = require('../models/hospitals');
 
 const addUser = (req, res, next) => {

@@ -6,8 +6,11 @@ var ObjectId=mongoose.Schema.Types.ObjectId;
 
 var RequestPatients = new mongoose.Schema({
   origin   : { type: String}, // La solicitud puede venir de un (A)mbulanciero o de un (P)aciente
-  originId : { type: ObjectId}, // ID del paciente o del ambulanciero que realizó la solicitud
-  patientId: { type: ObjectId, ref: "patients"}, // ID del paciente 
+  // originId : { type: ObjectId}, // ID del paciente o del ambulanciero que realizó la solicitud
+  // patientId: { type: ObjectId, ref: "patients"}, // ID del paciente 
+  patient:   { type: String}, // Temporalmente guardo el nombre del paciente, a futuroconviene el ID para referenciarlo?
+  healthCare:{ type: ObjectId, ref: "healthcares"},
+  healthCarePlan:{ type: ObjectId, ref: "healthcareplans"},    
   pathology: { type: String}, // Patologías que presenta el paciente
   inputDate: {type: Date, default: Date.now}, // Fecha que se generó la solicitud
   priority : { type: Number}, // Prioridad según criterio (de 1 a 5?)
@@ -16,8 +19,8 @@ var RequestPatients = new mongoose.Schema({
   responseDate: {type: Date}, // Fecha en la que se respondió a la soliciud
   responseUser:{ type: ObjectId, ref: "users"} // ID del usuario que respondió la siolicitud
 }, {
-    collections: 'request',
+    collections: 'requestpatients',
    } 
 );
 
-module.exports = mongoose.model('request', RequestPatients);
+module.exports = mongoose.model('requestpatients', RequestPatients);

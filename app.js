@@ -9,6 +9,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const rooms = require('./routes/rooms');
 const hospitals = require('./routes/hospitals');
+const patient = require('./routes/patient');
 const passport =require ('passport');
 var LocalStrategy = require('passport-local').Strategy;
 // var security = require('./config/security');
@@ -66,6 +67,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/rooms', rooms);
 app.use('/hospitals', hospitals);
+app.use('/patient', patient);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
