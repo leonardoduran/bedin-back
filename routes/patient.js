@@ -36,8 +36,13 @@ router.get('/allRequest', function(req, res, next) {
 
 router.get('/allRequest/:hospitalId', function(req, res, next) {
   // retorna todas las request de pacientes para el hospital recibido por parametro
+  
   let hospitalID=req.params.hospitalId;
-  console.log("Request del hospital "+hospitalID)
+//   console.log("Request del hospital "+hospitalID)
+
+// console.log(req.isAuthenticated())
+// console.log(req.user)
+
   RequestPatient.find({hospitalID:hospitalID}).populate('healthCare').populate('healthCarePlan').exec((err, result)=>{
   res.send(result);  
   })
@@ -54,7 +59,7 @@ router.get('/request/:requestId', function(req, res, next) {
 
 router.get('/formadd/:healthCareId', function(req, res, next) {
 	let osId=req.params.healthCareId
-	HC.find({"_id":osId}).populate('plans').exec((err, result)=>{
+	HC.find({"_id":osId}).populate('plans').populate('hospitals').exec((err, result)=>{
   		res.send(result);  
   	})
 });

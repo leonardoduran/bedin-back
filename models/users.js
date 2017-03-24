@@ -9,7 +9,7 @@ var User = new mongoose.Schema({
   username:{ type: String, required: true, unique: true },
   createdAt: {type: Date, default: Date.now},
   rol: {type: String, default: "user"},
-  hospitalCode:{type: ObjectId, ref: "hospitals"}, // Hospitales con los que trabaja la OS
+  hospitalCode:{type: ObjectId, ref: "hospitals"}, // Hospitales con donde trabaja el usuario
   provider:{
     type: String,
     // required : 'Provider es obligatorio'
