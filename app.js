@@ -3,6 +3,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const session = require('express-session')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const index = require('./routes/index');
@@ -11,7 +12,7 @@ const rooms = require('./routes/rooms');
 const hospitals = require('./routes/hospitals');
 const patient = require('./routes/patient');
 const passport =require ('passport');
-var LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 // var security = require('./config/security');
 var User = require('./models/users');
 
@@ -23,9 +24,12 @@ mongoose.connect('mongodb://localhost/bedin-db');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
+app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -38,7 +42,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 const allowCrossDomain = function(req, res, next) {
     // intercept OPTIONS method

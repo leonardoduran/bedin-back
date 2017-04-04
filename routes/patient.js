@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var RequestPatient= require('../models/requestpatients');
 var HC= require('../models/healthcares');
-
+var mongoose = require('mongoose');
 
 router.post('/addRequest', function(req, res, next) {
    	let aReqPatient=req.body.requestPatient;
@@ -33,17 +33,53 @@ router.get('/allRequest', function(req, res, next) {
 	// 	}
 	// })
 
+router.put('/confirm/:requestId/:hospitalId/:userId', function(req, res, next) {
+  let reqID=req.params.requestId;
+  let hospitalID=req.params.hospitalId;
+  let userId=req.params.userId;
 
-router.get('/allRequest/:hospitalId', function(req, res, next) {
+  RequestPatient.findOneAndUpdate({_id:reqID},{$set: { state:'Aceptada', hospitalID:hospitalID,responseUser:userId, responseDate:Date.now()}}, {upsert:true}).
+  
+  exec((err,result) => {
+    res.send(result);  
+  })
+
+});
+
+
+router.get('/allRequestAccept/:hospitalId', function(req, res, next) {
+  // retorna todas las request aceptadas de pacientes para el hospital recibido por parametro  
+  let hospitalID=req.params.hospitalId;
+ console.log("paso") 
+    RequestPatient.find(
+      {$and: [{state:'Aceptada'}, {hospitalID:hospitalID}]})
+      .populate('healthCare')
+      .populate('healthCarePlan')
+      .populate('responseUser')
+      .exec((err, result)=>{
+        res.send(result);  
+      })
+});
+
+
+router.get('/allRequestGen/:hospitalId', function(req, res, next) {
   // retorna todas las request de pacientes para el hospital recibido por parametro
   
   let hospitalID=req.params.hospitalId;
 //   console.log("Request del hospital "+hospitalID)
 
 // console.log(req.isAuthenticated())
-// console.log(req.user)
+console.log(req.user)
 
-  RequestPatient.find({hospitalID:hospitalID}).populate('healthCare').populate('healthCarePlan').exec((err, result)=>{
+// RequestPatient.find({hospitalID:hospitalID}).populate('healthCare').populate('healthCarePlan').exec((err, result)=>{
+  
+    RequestPatient.find(
+      {$and: [{state:'Generada'},
+              {$or: [ {hospitalID:hospitalID}, {hospitalID:mongoose.Schema.Types.ObjectId('')}]}
+             ]
+      }
+      
+      ).populate('healthCare').populate('healthCarePlan').exec((err, result)=>{
   res.send(result);  
   })
 });

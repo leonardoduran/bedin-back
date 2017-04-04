@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return res.send({msj: "Error", err}) }
@@ -26,6 +27,7 @@ router.post('/login', function(req, res, next) {
         if (!err) {
           // res.user.hospitalDesc=result.name;
           let hospital =result.name;
+          req.user = user;
           return res.send({msj: "Usuario logueado correctamente", user,hospital});
           // next(); 
         }else {
