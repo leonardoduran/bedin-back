@@ -17,7 +17,7 @@ router.post('/login', function(req, res, next) {
       // re-render the login form with a message
       
       // return res.send({msj: info.message })
-      return res.send({error:true, msj: info.message});
+      return res.send({error:true, msj: 'Usuario o password incorrectos'});
 
     }
     req.logIn(user, function(err) {
