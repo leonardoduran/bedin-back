@@ -36,44 +36,49 @@ const validNewUser = (req, res, next) => {
   }
 };
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+// /* GET home page. */
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+
+// app.use(express.static('./build'));
+router.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, './build', 'index.html'));
 });
 
 // router.post('/register', validNewUser, addUser, function(req, res, next) {
 //   res.send({msj:"Usuario registrado"});
 // });
 
-router.post('/register',function(req, res, next) {
-  User.register(new User({username: req.body.user.userName, name:req.body.user.name, hospitalCode:req.body.user.hospitalCode}), req.body.user.password, function(err) {
-    if (err) {
-      console.log('error while user register!',err.name);
-      return res.send({error:true,msj:err.name})
-      // return next(err);
+// router.post('/register',function(req, res, next) {
+//   User.register(new User({username: req.body.user.userName, name:req.body.user.name, hospitalCode:req.body.user.hospitalCode}), req.body.user.password, function(err) {
+//     if (err) {
+//       console.log('error while user register!',err.name);
+//       return res.send({error:true,msj:err.name})
+//       // return next(err);
 
-    }
-    res.send({msj:"Usuario registrado"});
-    // res.redirect('/');
-  });
-});
+//     }
+//     res.send({msj:"Usuario registrado"});
+//     // res.redirect('/');
+//   });
+// });
 
-router.get('/healthCare', function(req, res, next) {
-  HealthCare.find({}).exec((err, result)=>{
-    console.log("Result ", result)
-    console.log("Error ",err)    
-  res.send(result);  
-  })
-});
+// router.get('/healthCare', function(req, res, next) {
+//   HealthCare.find({}).exec((err, result)=>{
+//     console.log("Result ", result)
+//     console.log("Error ",err)    
+//   res.send(result);  
+//   })
+// });
 
-router.get('/healthCarePlans', function(req, res, next) {
-  HealthCarePlans.find({}).exec((err, result)=>{
+// router.get('/healthCarePlans', function(req, res, next) {
+//   HealthCarePlans.find({}).exec((err, result)=>{
 
-    console.log("Result ", result)
-    console.log("Error ",err)
+//     console.log("Result ", result)
+//     console.log("Error ",err)
 
-    res.send(result);  
-  })
-});
+//     res.send(result);  
+//   })
+// });
 
 module.exports = router;

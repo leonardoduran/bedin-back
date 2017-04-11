@@ -42,4 +42,22 @@ router.post('/newHealthCare', function(req, res, next) {
   res.send({ok:"OK!"});  
 });
 
+router.get('/healthCare', function(req, res, next) {
+  HC.find({}).exec((err, result)=>{
+    console.log("Result ", result)
+    console.log("Error ",err)    
+  res.send(result);  
+  })
+});
+
+router.get('/healthCarePlans', function(req, res, next) {
+  HCP.find({}).exec((err, result)=>{
+
+    console.log("Result ", result)
+    console.log("Error ",err)
+
+    res.send(result);  
+  })
+});
+
 module.exports = router;

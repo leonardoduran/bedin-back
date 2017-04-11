@@ -13,8 +13,6 @@ router.post('/addRequest', function(req, res, next) {
   res.send({ok:"OK!"});  
 });
 
-
-
 router.get('/allRequest', function(req, res, next) {
   // retorna todas las request de pacientes para todos los hospitales
   // RequestPatient.find({}).exec((err, result)=>{
@@ -37,7 +35,6 @@ router.put('/confirm/:requestId/:hospitalId/:userId', function(req, res, next) {
   let reqID=req.params.requestId;
   let hospitalID=req.params.hospitalId;
   let userId=req.params.userId;
-
   RequestPatient.findOneAndUpdate({_id:reqID},{$set: { state:'Aceptada', hospitalID:hospitalID,responseUser:userId, responseDate:Date.now()}}, {upsert:true}).
   
   exec((err,result) => {
@@ -50,7 +47,6 @@ router.put('/confirm/:requestId/:hospitalId/:userId', function(req, res, next) {
 router.get('/allRequestAccept/:hospitalId', function(req, res, next) {
   // retorna todas las request aceptadas de pacientes para el hospital recibido por parametro  
   let hospitalID=req.params.hospitalId;
- console.log("paso") 
     RequestPatient.find(
       {$and: [{state:'Aceptada'}, {hospitalID:hospitalID}]})
       .populate('healthCare')
@@ -67,9 +63,8 @@ router.get('/allRequestGen/:hospitalId', function(req, res, next) {
   
   let hospitalID=req.params.hospitalId;
 //   console.log("Request del hospital "+hospitalID)
-
+console.log("Autenticado (Todas las request): ",req.isAuthenticated())
 // console.log(req.isAuthenticated())
-console.log(req.user)
 
 // RequestPatient.find({hospitalID:hospitalID}).populate('healthCare').populate('healthCarePlan').exec((err, result)=>{
   
