@@ -18,7 +18,9 @@ var User = require('./models/users');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/bedin-db');
+// mongoose.connect('mongodb://localhost/bedin-db');
+mongoose.connect('mongodb://leonardo:bedin-db@ds159330.mlab.com:59330/bedin-db');
+// mongodb://<dbuser>:<dbpassword>@ds159330.mlab.com:59330/bedin-db
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -75,7 +77,7 @@ app.use('/', index);
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

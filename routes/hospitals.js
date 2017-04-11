@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/new', function(req, res, next) {
    	let aNewHospital=req.body.hospital;
-   	console.log(req.body)
     Hospital.create(aNewHospital,function(err,result){
       if(err) console.log(err);
     });
@@ -23,7 +22,6 @@ router.post('/new', function(req, res, next) {
 
 router.post('/newPlan', function(req, res, next) {
    	let aNewPlan=req.body.plan;
-   	console.log(req.body)
     HCP.create(aNewPlan,function(err,result){
       if(err) console.log(err);
     });
@@ -34,7 +32,6 @@ router.post('/newPlan', function(req, res, next) {
 
 router.post('/newHealthCare', function(req, res, next) {
     let aHC=req.body.healthCare;
-    console.log(aHC)
     HC.create(aHC,function(err,result){
       if(err) console.log(err);
     });
@@ -44,8 +41,8 @@ router.post('/newHealthCare', function(req, res, next) {
 
 router.get('/healthCare', function(req, res, next) {
   HC.find({}).exec((err, result)=>{
-    console.log("Result ", result)
-    console.log("Error ",err)    
+    // console.log("Result ", result)
+    // console.log("Error ",err)    
   res.send(result);  
   })
 });
@@ -53,8 +50,8 @@ router.get('/healthCare', function(req, res, next) {
 router.get('/healthCarePlans', function(req, res, next) {
   HCP.find({}).exec((err, result)=>{
 
-    console.log("Result ", result)
-    console.log("Error ",err)
+    // console.log("Result ", result)
+    // console.log("Error ",err)
 
     res.send(result);  
   })

@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    console.log('usuario', user)
     if (err) { return res.send({msj: "Error", err}) }
     if (!user) {
       // *** Display message without using flash option
