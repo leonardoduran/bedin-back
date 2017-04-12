@@ -20,7 +20,6 @@ const app = express();
 
 // mongoose.connect('mongodb://localhost/bedin-db');
 mongoose.connect('mongodb://leonardo:bedin-db@ds159330.mlab.com:59330/bedin-db');
-// mongodb://<dbuser>:<dbpassword>@ds159330.mlab.com:59330/bedin-db
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
