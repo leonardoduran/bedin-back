@@ -18,8 +18,8 @@ var User = require('./models/users');
 
 const app = express();
 
-// mongoose.connect('mongodb://localhost/bedin-db');
-mongoose.connect('mongodb://leonardo:bedin-db@ds159330.mlab.com:59330/bedin-db');
+mongoose.connect('mongodb://localhost/bedin-db');
+// mongoose.connect('mongodb://leonardo:bedin-db@ds159330.mlab.com:59330/bedin-db');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,12 +31,22 @@ app.set('view engine', 'ejs');
 //     saveUninitialized: false
 // }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
+    app.use(cookieParser());
+    app.use(session({
+        secret: 'the princess and the frog',
+        saveUninitialized: true,
+        resave: true
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
 
 
 // uncomment after placing your favicon in /public
@@ -44,7 +54,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('./build'));
 

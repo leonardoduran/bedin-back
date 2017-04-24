@@ -21,7 +21,8 @@ router.post('/login', function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return res.send({msj: "Error", err}); }
-// console.log("Autenticado (Login): ",req.isAuthenticated())
+console.log("Autenticado (Login): ",req.isAuthenticated())
+// console.log("User: ",req.user)
       Hospital.findOne({_id:user.hospitalCode})
         .exec((err, result)=>{
           if (!err) {
