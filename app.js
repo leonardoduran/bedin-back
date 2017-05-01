@@ -18,8 +18,8 @@ var User = require('./models/users');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/bedin-db');
-// mongoose.connect('mongodb://leonardo:bedin-db@ds159330.mlab.com:59330/bedin-db');
+mongoose.connect('mongodb://localhost/bedin-db'); // Local
+// mongoose.connect('mongodb://leonardo:bedin-db@ds159330.mlab.com:59330/bedin-db'); // deploy
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

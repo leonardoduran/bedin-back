@@ -9,6 +9,7 @@ var RequestPatients = new mongoose.Schema({
   // originId : { type: ObjectId}, // ID del paciente o del ambulanciero que realizó la solicitud
   // patientId: { type: ObjectId, ref: "patients"}, // ID del paciente 
   patient:   { type: String}, // Temporalmente guardo el nombre del paciente, a futuroconviene el ID para referenciarlo?
+  age: {type: Number},
   healthCare:{ type: ObjectId, ref: "healthcares"},
   healthCarePlan:{ type: ObjectId, ref: "healthcareplans"},    
   pathology: { type: String}, // Patologías que presenta el paciente
