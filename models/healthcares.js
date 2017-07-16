@@ -10,6 +10,10 @@ var Healthcares = new mongoose.Schema({
   phone:    {type: String},
   plans:    [{type: ObjectId, ref: "healthcareplans"}], // Planes de la OS
   hospitals:[{type: ObjectId, ref: "hospitals"}] // Hospitales con los que trabaja la OS
+  
+  // hospitalPlans:[{type: ObjectId, ref: "healthcareplans"},
+  				 // [{type: ObjectId, ref: "hospitals"}] (Nuevo formato de cómo debe guardarse la info)
+  				// ]
 }, {
     collections: 'healthcares',
    } 

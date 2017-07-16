@@ -51,16 +51,15 @@ router.post('/register',function(req, res, next) {
   User.register(new User(
     { username: req.body.user.userName, 
       name:req.body.user.name, 
-      hospitalCode:req.body.user.hospitalCode}), 
+      hospitalCode:req.body.user.hospitalCode,
+      osCode:req.body.user.osCode}), 
       req.body.user.password, 
     function(err) {
     if (err) {
       console.log('error while user register!',err.name);
       return res.send({error:true,msj:err.name})
       // return next(err);
-
     }
-
     res.send({error: false, msj:"Usuario registrado"});
     // res.redirect('/');
   })

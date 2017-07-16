@@ -100,7 +100,7 @@ router.get('/request/:requestId', function(req, res, next) {
 router.get('/formadd/:healthCareId', function(req, res, next) {
 	let osId=req.params.healthCareId
 	HC.find({"_id":osId}).populate('plans').populate('hospitals').exec((err, result)=>{
-  		res.send(result);  
+      res.send(result);  
   	})
 });
 
